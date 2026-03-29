@@ -1,0 +1,1625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alfa... Meri Jaan ❤️</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Satisfy&family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #1a0a2e;
+            --secondary-dark: #2d1b4e;
+            --accent-pink: #ff6b9d;
+            --accent-gold: #ffd700;
+            --accent-purple: #b565d8;
+            --text-light: #f8f8f8;
+            --text-cream: #ffe5d9;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 100%);
+            color: var(--text-light);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Particle Background */
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.3;
+        }
+
+        /* Islamic Geometric Pattern Background */
+        .pattern-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255, 107, 157, 0.03) 35px, rgba(255, 107, 157, 0.03) 70px),
+                repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(181, 101, 216, 0.03) 35px, rgba(181, 101, 216, 0.03) 70px);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Page Container */
+        .page-container {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .page {
+            display: none;
+            width: 90%;
+            max-width: 900px;
+            padding: 60px 40px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .page.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Typography Styles */
+        .page h1 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple), var(--accent-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 30px;
+            animation: shimmer 3s infinite;
+            text-shadow: 0 0 30px rgba(255, 107, 157, 0.3);
+        }
+
+        @keyframes shimmer {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.2); }
+        }
+
+        .page h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            color: var(--accent-pink);
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .page h3 {
+            font-family: 'Satisfy', cursive;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+        }
+
+        .page p, .page .text-content {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            line-height: 1.9;
+            color: var(--text-cream);
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .shayari {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.2rem, 3vw, 1.6rem);
+            line-height: 2.2;
+            font-style: italic;
+            color: var(--accent-pink);
+            margin: 30px 0;
+            padding: 30px;
+            border-left: 3px solid var(--accent-gold);
+            border-right: 3px solid var(--accent-gold);
+            background: rgba(255, 107, 157, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+        }
+
+        .shayari .line {
+            margin: 15px 0;
+            opacity: 0;
+            animation: fadeIn 1s ease-in forwards;
+        }
+
+        .shayari .line:nth-child(1) { animation-delay: 0.3s; }
+        .shayari .line:nth-child(2) { animation-delay: 0.6s; }
+        .shayari .line:nth-child(3) { animation-delay: 0.9s; }
+        .shayari .line:nth-child(4) { animation-delay: 1.2s; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Special Text Box */
+        .special-box {
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.1), rgba(181, 101, 216, 0.1));
+            border: 2px solid var(--accent-pink);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 30px 0;
+            box-shadow: 0 10px 40px rgba(255, 107, 157, 0.2);
+            backdrop-filter: blur(20px);
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .nav-btn {
+            font-family: 'Cinzel', serif;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(255, 107, 157, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 30px rgba(255, 107, 157, 0.6);
+        }
+
+        .nav-btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* Page Counter */
+        .page-counter {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: var(--accent-gold);
+            z-index: 100;
+            background: rgba(26, 10, 46, 0.8);
+            padding: 10px 20px;
+            border-radius: 30px;
+            border: 2px solid var(--accent-gold);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Floating Hearts Animation */
+        .heart {
+            position: fixed;
+            font-size: 20px;
+            animation: float 6s infinite;
+            opacity: 0;
+            z-index: 5;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Islamic Pattern Decorations */
+        .decoration {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            opacity: 0.1;
+            animation: rotate 20s linear infinite;
+        }
+
+        .decoration.top-left {
+            top: 50px;
+            left: 50px;
+        }
+
+        .decoration.top-right {
+            top: 50px;
+            right: 50px;
+            animation-direction: reverse;
+        }
+
+        .decoration.bottom-left {
+            bottom: 50px;
+            left: 50px;
+            animation-delay: -10s;
+        }
+
+        .decoration.bottom-right {
+            bottom: 50px;
+            right: 50px;
+            animation-direction: reverse;
+            animation-delay: -10s;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Special Last Page Styles */
+        .final-message {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            padding: 30px;
+            border: 3px solid var(--accent-gold);
+            border-radius: 20px;
+            margin: 30px 0;
+            animation: glow 2s infinite;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(255, 215, 0, 0.6); }
+        }
+
+        /* Game Container */
+        .game-container {
+            background: rgba(255, 107, 157, 0.1);
+            border: 2px solid var(--accent-purple);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+
+        .wish-btn {
+            font-family: 'Satisfy', cursive;
+            padding: 20px 50px;
+            font-size: 1.5rem;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 20px;
+            box-shadow: 0 5px 20px rgba(181, 101, 216, 0.4);
+        }
+
+        .wish-btn:hover {
+            transform: scale(1.1) rotate(-2deg);
+            box-shadow: 0 8px 30px rgba(181, 101, 216, 0.6);
+        }
+
+        .wish-output {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--accent-gold);
+            margin-top: 20px;
+            min-height: 60px;
+            font-style: italic;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .page {
+                padding: 40px 20px;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .page-counter {
+                bottom: 20px;
+                right: 20px;
+                font-size: 1rem;
+                padding: 8px 15px;
+            }
+
+            .decoration {
+                width: 60px;
+                height: 60px;
+            }
+        }
+
+        /* Loading Animation */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-heart {
+            font-size: 80px;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.2); }
+            50% { transform: scale(1); }
+        }
+
+        /* Glowing text effect */
+        .glow-text {
+            animation: textGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes textGlow {
+            0%, 100% { text-shadow: 0 0 10px rgba(255, 107, 157, 0.5), 0 0 20px rgba(255, 107, 157, 0.3); }
+            50% { text-shadow: 0 0 20px rgba(255, 107, 157, 0.8), 0 0 40px rgba(255, 107, 157, 0.5), 0 0 60px rgba(255, 107, 157, 0.3); }
+        }
+
+        /* Star decoration */
+        .star {
+            position: fixed;
+            color: var(--accent-gold);
+            animation: twinkle 2s infinite;
+            z-index: 5;
+            font-size: 12px;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Game Specific Styles */
+        .heart-game-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .heart-btn {
+            font-size: 50px;
+            background: rgba(255, 107, 157, 0.2);
+            border: 2px solid var(--accent-pink);
+            border-radius: 15px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .heart-btn:hover {
+            transform: scale(1.2) rotate(10deg);
+            background: rgba(255, 107, 157, 0.4);
+        }
+
+        .heart-btn.clicked {
+            animation: heartPop 0.5s ease;
+        }
+
+        @keyframes heartPop {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.5); }
+        }
+
+        .score-display {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--accent-gold);
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        /* Memory Card Game */
+        .memory-game {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            max-width: 500px;
+            margin: 30px auto;
+        }
+
+        .memory-card {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .memory-card .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--secondary-dark), var(--primary-dark));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backface-visibility: hidden;
+            transition: transform 0.6s;
+            border: 2px solid var(--accent-gold);
+        }
+
+        .memory-card .card-front {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backface-visibility: hidden;
+            transform: rotateY(180deg);
+            transition: transform 0.6s;
+        }
+
+        .memory-card.flipped .card-back {
+            transform: rotateY(180deg);
+        }
+
+        .memory-card.flipped .card-front {
+            transform: rotateY(0deg);
+        }
+
+        .memory-card.matched {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        /* Quiz Styles */
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .quiz-option {
+            font-family: 'Cormorant Garamond', serif;
+            padding: 20px;
+            background: rgba(255, 107, 157, 0.1);
+            border: 2px solid var(--accent-purple);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .quiz-option:hover {
+            background: rgba(255, 107, 157, 0.2);
+            transform: translateX(10px);
+        }
+
+        .quiz-option.correct {
+            background: rgba(0, 255, 0, 0.2);
+            border-color: #0f0;
+        }
+
+        .quiz-option.wrong {
+            background: rgba(255, 0, 0, 0.2);
+            border-color: #f00;
+        }
+
+        /* Love Calculator */
+        .calculator-input {
+            font-family: 'Playfair Display', serif;
+            padding: 15px;
+            font-size: 1.2rem;
+            background: rgba(255, 107, 157, 0.1);
+            border: 2px solid var(--accent-pink);
+            border-radius: 10px;
+            color: var(--text-light);
+            width: 100%;
+            max-width: 400px;
+            margin: 15px auto;
+            display: block;
+            text-align: center;
+        }
+
+        .calculator-input:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .love-percentage {
+            font-size: 4rem;
+            font-family: 'Cinzel', serif;
+            color: var(--accent-pink);
+            margin: 20px 0;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Catching Hearts Game */
+        .catching-game {
+            position: relative;
+            height: 400px;
+            background: rgba(26, 10, 46, 0.5);
+            border: 2px solid var(--accent-pink);
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 30px 0;
+        }
+
+        .basket {
+            position: absolute;
+            bottom: 10px;
+            width: 80px;
+            height: 80px;
+            font-size: 50px;
+            cursor: move;
+            transition: left 0.1s;
+        }
+
+        .falling-heart {
+            position: absolute;
+            font-size: 30px;
+            animation: fall linear;
+        }
+
+        @keyframes fall {
+            to { top: 100%; }
+        }
+
+        /* Interactive Button Animations */
+        .interactive-btn {
+            font-family: 'Dancing Script', cursive;
+            padding: 20px 50px;
+            font-size: 1.5rem;
+            background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 15px;
+            box-shadow: 0 5px 25px rgba(255, 107, 157, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .interactive-btn:before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .interactive-btn:hover:before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .interactive-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 40px rgba(255, 107, 157, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-heart">💖</div>
+    </div>
+
+    <!-- Particles Canvas -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Pattern Overlay -->
+    <div class="pattern-overlay"></div>
+
+    <!-- Page Counter -->
+    <div class="page-counter" id="pageCounter">1 / 15</div>
+
+    <!-- Main Container -->
+    <div class="page-container">
+        <!-- Page 1: Opening -->
+        <div class="page active" data-page="1">
+            <svg class="decoration top-left" viewBox="0 0 100 100">
+                <path d="M50 10 L90 50 L50 90 L10 50 Z" fill="none" stroke="currentColor" stroke-width="2"/>
+                <circle cx="50" cy="50" r="20" fill="none" stroke="currentColor" stroke-width="2"/>
+            </svg>
+            <svg class="decoration bottom-right" viewBox="0 0 100 100">
+                <path d="M50 10 L90 50 L50 90 L10 50 Z" fill="none" stroke="currentColor" stroke-width="2"/>
+                <circle cx="50" cy="50" r="20" fill="none" stroke="currentColor" stroke-width="2"/>
+            </svg>
+            
+            <h1 class="glow-text">Alfa... Meri Jaan</h1>
+            <div class="shayari">
+                <div class="line">Tumse kehne ko bohot kuch hai,</div>
+                <div class="line">Dil mein chhupa ke rakha hai bohot kuch,</div>
+                <div class="line">Aaj sab batana chahta hoon,</div>
+                <div class="line">Kyunki tum mere liye ho sab kuch.</div>
+            </div>
+            <div class="special-box">
+                <p style="font-size: 1.3rem; color: var(--accent-pink);">Aaj tumhara special din hai... par main tumhe "Happy Birthday" nahi bolunga.</p>
+                <p style="margin-top: 15px;">Kyunki jo main tumhe batane wala hoon, woh ek birthday wish se kahin zyada important hai.</p>
+                <p style="margin-top: 15px; color: var(--accent-gold); font-weight: 600;">Thoda waqt do... aur apne dil se suno ❤️</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="nextPage()">Aage Badho →</button>
+            </div>
+        </div>
+
+        <!-- Page 2: Love Expression with Heart Game -->
+        <div class="page" data-page="2">
+            <h2>Pehle Yeh Jaano...</h2>
+            <div class="shayari">
+                <div class="line">Tumhe dekhta hoon toh dil kehta hai,</div>
+                <div class="line">Ki Allah ne bohot khoobsurat banaya tumhe,</div>
+                <div class="line">Lekin tumhari akhirat ki fikr bhi hai,</div>
+                <div class="line">Isliye pyaar se samjhana chahta hoon tumhe.</div>
+            </div>
+            
+            <div class="game-container">
+                <h3 style="color: var(--accent-purple); margin-bottom: 15px;">💖 Hearts Ko Catch Karo! 💖</h3>
+                <p style="color: var(--text-cream); margin-bottom: 15px;">Basket ko move karo aur hearts catch karo!</p>
+                <div class="catching-game" id="catchingGame">
+                    <div class="basket" id="basket">🎁</div>
+                </div>
+                <div class="score-display">Score: <span id="catchScore">0</span></div>
+                <button class="interactive-btn" onclick="startCatchingGame()">Game Start Karo!</button>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="prevPage()">← Peeche</button>
+                <button class="nav-btn" onclick="nextPage()">Aage →</button>
+            </div>
+        </div>
+
+        <!-- Page 3: Islamic Message with Love -->
+        <div class="page" data-page="3">
+            <h2>Tumse Mohabbat Hai Isliye...</h2>
+            <div class="text-content">
+                <p>Alfa, suno... main tumse bohot pyaar karta hoon. Aur jab pyaar hota hai na, toh hum chahte hain ki jo hum pyaar karte hain, woh sahi raaste pe chale.</p>
+                <p>Islam mein birthday celebrate karna allowed nahi hai. Yeh bidah hai - ek cheez jo Prophet ﷺ ne nahi ki, Sahaba ne nahi kiya.</p>
+                <p>Lekin main tumhe force nahi kar raha... bas pyaar se samjha raha hoon ❤️</p>
+            </div>
+            <div class="special-box">
+                <div class="shayari">
+                    <div class="line">Tumhari khushi dekhni hai mujhe,</div>
+                    <div class="line">Lekin Allah ki raza mein,</div>
+                    <div class="line">Kyunki asli mohabbat woh hai,</div>
+                    <div class="line">Jo Allah ke raaste pe le jaaye.</div>
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="prevPage()">← Peeche</button>
+                <button class="nav-btn" onclick="nextPage()">Aage →</button>
+            </div>
+        </div>
+
+        <!-- Page 4: Memory Matching Game -->
+        <div class="page" data-page="4">
+            <h2>Tumhare Liye Kuch Special 💕</h2>
+            <p style="color: var(--text-cream); margin-bottom: 20px;">Memory Game khelo! Matching hearts dhundo!</p>
+            
+            <div class="memory-game" id="memoryGame">
+                <!-- Cards will be generated by JS -->
+            </div>
+            <div class="score-display">
+                Moves: <span id="memoryMoves">0</span> | 
+                Matched: <span id="memoryMatched">0</span>/8
+            </div>
+            <button class="interactive-btn" onclick="initMemoryGame()">Naya Game!</button>
+
+            <div class="shayari" style="margin-top: 30px;">
+                <div class="line">Har pal tumhare saath rehna chahta hoon,</div>
+                <div class="line">Har khushi mein tumhe dekhna chahta hoon,</div>
+                <div class="line">Lekin Allah ki khushi mein,</div>
+                <div class="line">Tumhari muskurahat dekhna chahta hoon.</div>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="prevPage()">← Peeche</button>
+                <button class="nav-btn" onclick="nextPage()">Aage →</button>
+            </div>
+        </div>
+
+        <!-- Page 5: Romantic Shayari -->
+        <div class="page" data-page="5">
+            <h1 style="font-size: 2.5rem;">Alfa... ❤️</h1>
+            <div class="shayari">
+                <div class="line">Tum meri dua ho, meri khushi ho,</div>
+                <div class="line">Tum meri zindagi ki wajah ho,</div>
+                <div class="line">Birthday na sahi, har din tumhara hai,</div>
+                <div class="line">Kyunki mere dil mein tumhari jagah hai.</div>
+            </div>
+            <div class="special-box">
+                <p style="font-size: 1.3rem; color: var(--accent-pink);">Main tumhe duniya aur akhirat dono mein chahta hoon.</p>
+                <p style="margin-top: 15px; color: var(--text-cream);">Isliye yeh chhoti si baat samajhna zaroori hai...</p>
+                <p style="margin-top: 15px; color: var(--accent-gold); font-weight: 600;">Allah ne sirf do Eids di hain - bas wohi celebrate karna sahi hai.</p>
+            </div>
+            <div class="shayari" style="margin-top: 30px;">
+                <div class="line">Candles ki jagah dua ki roshni chahiye,</div>
+                <div class="line">Wishes ki jagah Allah ki barkat chahiye,</div>
+                <div class="line">Tum khush raho bas yahi chahta hoon,</div>
+                <div class="line">Lekin Allah ki khushi mein yeh chahta hoon.</div>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="prevPage()">← Peeche</button>
+                <button class="nav-btn" onclick="nextPage()">Aage →</button>
+            </div>
+        </div>
+
+        <!-- Page 6: Heart Clicking Game -->
+        <div class="page" data-page="6">
+            <h2>Tumhare Liye Mera Pyaar 💕</h2>
+            <p style="color: var(--text-cream); margin-bottom: 20px;">Neeche hearts pe click karo aur dekho kya hota hai! 😊</p>
+            
+            <div class="heart-game-container" id="heartGameContainer">
+                <!-- Hearts will be generated by JS -->
+            </div>
+            <div class="score-display">
+                Clicks: <span id="heartClicks">0</span> | Love Level: <span id="loveLevel">0</span>%
+            </div>
+
+            <div class="shayari" style="margin-top: 30px;">
+                <div class="line">Har heart tumhare liye hai,</div>
+                <div class="line">Har dhadkan tumhara naam leti hai,</div>
+                <div class="line">Lekin sabse zyada pyaar,</div>
+                <div class="line">Allah se tumhare liye duaein maangti hai.</div>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="prevPage()">← Peeche</button>
+                <button class="nav-btn" onclick="nextPage()">Aage →</button>
+            </div>
+        </div>
+
+        <!-- Page 7: Deep Love Expression -->
+        <div class="page" data-page="7">
+            <h1 style="font-size: 2.8rem;">Alfa, Suno... ❤️</h1>
+            <div class="special-box">
+                <p style="font-size: 1.3rem; line-height: 2;">
+                    Tumhe pata hai kya? Main tumhe kitna miss karta hoon...<br>
+                    Tumhari awaaz sunn ke dil ko sukoon milta hai,<br>
+                    Tumhari smile dekh ke duniya rangeen lagti hai,<br>
+                    Tumhare saath waqt bitana... jannat jaisa lagta hai.
+                </p>
+            </div>
+            <div class="shayari">
+                <div class="line">Tum jo paas ho toh kya kehna,</div>
+                <div class="line">Tum jo door ho toh dil tadapna,</div>
+                <div class="line">Lekin ek baat yaad rakhna,</div>
+                <div class="line">Allah ki raza mein hi rehna.</div>
+            </div>
+            <div class="special-box" style="margin-top: 30px;">
+                <p style="color: var(--accent-gold); font-size: 1.2rem; font-weight: 600;">
+                    Main chahta hoon ki tum samjho - birthday celebrate na karna, yeh tumse pyaar ki kami nahi hai.<br><br>
+                    Yeh toh aur bhi zyada pyaar hai... kyunki main tumhe Allah ke kareeb dekhna chahta hoon.
+                </p>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="prevPage()">← Peeche</button>
+                <button class="nav-btn" onclick="nextPage()">Aage →</button>
+            </div>
+        </div>
+
+        <!-- Page 8: Love Calculator Game -->
+        <div class="page" data-page="8">
+            <h2>Tumhara Aur Mera Connection 💖</h2>
+            
+            <div class="game-container">
+                <h3 style="color: var(--accent-purple); margin-bottom: 20px;">Love Calculator ✨</h3>
+                <p style="color: var(--text-cream); margin-bottom: 15px;">Apna naam likho aur dekho humare beech ka pyaar!</p>
+                <input type="text" class="calculator-input" id="yourName" placeholder="Tumhara Naam..." value="Alfa">
+                <input type="text" class="calculator-input" id="myName" placeholder="Mera Naam..." value="Affan" readonly>
+                <button class="interactive-btn" onclick="calculateLove()">Calculate Karo!</button>
+                <div class="love-percentage" id="loveResult"></div>
+                <p id="loveMessage" style="color: var(--accent-pink); font-size: 1.2rem; margin-top: 15px;"></p>
+            </div>
+
+            <div class="shayari" style="margin-top: 30px;">
+                <div class="line">Percentage se nahi,</div>
+                <div class="line">Dil se napte hain rishtey,</div>
+                <div class="line">Tumse mohabbat hai mujhe,</div>
+                <div class="line">Aur Allah se maangta hoon tumhari khushiyan.</div>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="prevPage()">← Peeche</button>
+                <button class="nav-btn" onclick="nextPage()">Aage →</button>
+            </div>
+        </div>
+
+        <!-- Page 9: Romantic Promise -->
+        <div class="page" data-page="9">
+            <h2>Mere Dil Se...</h2>
+            <div class="shayari">
+                <div class="line">Main tumhe duniya dunga agar tum kaho,</div>
+                <div class="line">Chaand sitare laake dunga agar tum chaho,</div>
+                <div class="line">Lekin yeh promise karo mujhse,</div>
+                <div class="line">Ki Allah ki raah pe chalogi jab main kahoon.</div>
+            </div>
+            <div class="special-box">
+                <p style="font-size: 1.3rem; color: var(--accent-pink);">Dekho Alfa, main sirf tumhari duniyawi khushi nahi chahta...</p>
+                <p style="margin-top: 15px; color: var(--text-cream);">Main chahta hoon ki tumhari akhirat bhi khushiyon se bhari ho.</p>
+                <p style="margin-top: 15px; color: var(--accent-gold); font-weight: 600;">Isliye birthday celebrate na karna - yeh ek chhoti si qurbani hai...</p>
+                <p style="margin-top: 10px; color: var(--accent-gold);">Lekin iska ajar bohot bada hai ❤️</p>
+            </div>
+            <div class="shayari" style="margin-top: 30px;">
+                <div class="line">Tum meri jaan ho, meri rooh ho,</div>
+                <div class="line">Tumhare bina zindagi adhoori hai,</div>
+                <div class="line">Lekin Allah tumhara malik hai,</div>
+                <div class="line">Aur uski itaat zaroori hai.</div>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="prevPage()">← Peeche</button>
+                <button class="nav-btn" onclick="nextPage()">Aage →</button>
+            </div>
+        </div>
+
+        <!-- Page 10: Quiz Game -->
+        <div class="page" data-page="10">
+            <h2>Tumhare Liye Ek Sawal 💭</h2>
+            
+            <div class="game-container">
+                <h3 style="color: var(--accent-purple); margin-bottom: 20px;">Quick Quiz!</h3>
+                <p style="color: var(--text-cream); font-size: 1.2rem; margin-bottom: 25px;">
+                    Islam mein kitne celebrations officially allowed hain?
+                </p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkQuizAnswer(this, false)">Birthday aur Anniversary</div>
+                    <div class="quiz-option" onclick="checkQuizAnswer(this, true)">Sirf do Eid (Eid ul-Fitr aur Eid ul-Adha)</div>
+                    <div class="quiz-option" onclick="checkQuizAnswer(this, false)">Koi bhi celebration jo khushi de</div>
+                    <div class="quiz-option" onclick="checkQuizAnswer(this, false)">Sab celebrations allowed hain</div>
+                </div>
+                <p id="quizFeedback" style="color: var(--accent-gold); font-size: 1.1rem; margin-top: 20px; min-height: 40px;"></p>
+            </div>
+
+            <div class="shayari" style="margin-top: 30px;">
+                <div class="line">Samajhna mushkil nahi hai,</div>
+                <div class="line">Bas dil se suno meri baat,</div>
+                <div class="line">Allah ki khushi mein hai asli maza,</div>
+                <div class="line">Baaki sab hai faani raat.</div>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="prevPage()">← Peeche</button>
+                <button class="nav-btn" onclick="nextPage()">Aage →</button>
+            </div>
+        </div>
+
+        <!-- Page 11: Deep Feelings -->
+        <div class="page" data-page="11">
+            <h1 style="font-size: 2.5rem;">Mere Dil Ki Awaaz...</h1>
+            <div class="shayari">
+                <div class="line">Kabhi socha hai tumne,</div>
+                <div class="line">Kyun itna pyaar karta hoon tumse?</div>
+                <div class="line">Kyunki tumhe dekhke lagta hai,</div>
+                <div class="line">Ki Allah ne meri dua suni hai.</div>
+            </div>
+            <div class="special-box">
+                <p style="font-size: 1.3rem; line-height: 2; color: var(--accent-pink);">
+                    Alfa, tumhe pata hai? Jab bhi main tumhare baare mein sochta hoon, dil mein sukoon aa jaata hai.<br><br>
+                    Tumhari hansi, tumhari baatein, tumhara andaaz... sab kuch perfect hai.<br><br>
+                    Lekin ek cheez aur perfect ho sakti hai... tumhara Allah se rishta. ❤️
+                </p>
+            </div>
+            <div class="shayari" style="margin-top: 30px;">
+                <div class="line">Main tumhe duniya mein bhi chahta hoon,</div>
+                <div class="line">Akhirat mein bhi paas chahta hoon,</div>
+                <div class="line">Isliye yeh chhoti si baat maano,</div>
+                <div class="line">Allah ki raah pe tum chalti raho.</div>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="prevPage()">← Peeche</button>
+                <button class="nav-btn" onclick="nextPage()">Aage →</button>
+            </div>
+        </div>
+
+        <!-- Page 12: Promise & Commitment -->
+        <div class="page" data-page="12">
+            <h2>Mera Waada Tumse 💍</h2>
+            <div class="special-box">
+                <p style="font-size: 1.2rem; line-height: 2;">
+                    Main tumse waada karta hoon Alfa...<br><br>
+                    Chahe birthday celebrate na karein, main har din tumhe special feel karaounga.<br>
+                    Tumhari har khushi ka khayal rakhonga.<br>
+                    Tumhare har gham mein saath dunga.<br>
+                    Tumhari har zarurat puri karunga.<br><br>
+                    Bas ek hi shart hai - Allah ke raaste pe chalna hai.
+                </p>
+            </div>
+            <div class="shayari">
+                <div class="line">365 din tumhare saath hoon,</div>
+                <div class="line">Har pal tumhari yaad mein hoon,</div>
+                <div class="line">Birthday ki zarurat nahi jab,</div>
+                <div class="line">Roz tumhari khushi mein hoon.</div>
+            </div>
+            <div class="special-box" style="margin-top: 30px;">
+                <p style="color: var(--accent-gold); font-size: 1.3rem; font-weight: 600;">
+                    Tumhari priority main hoon,<br>
+                    Lekin tumhari akhirat meri priority hai ❤️
+                </p>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="prevPage()">← Peeche</button>
+                <button class="nav-btn" onclick="nextPage()">Aage →</button>
+            </div>
+        </div>
+
+        <!-- Page 13: Final Love Expression -->
+        <div class="page" data-page="13">
+            <h1 class="glow-text" style="font-size: 3rem;">Alfa... I Love You ❤️</h1>
+            <div class="shayari">
+                <div class="line">Yeh lafz chhote hain mere pyaar ke liye,</div>
+                <div class="line">Yeh shabd kam hain mere jazbaaton ke liye,</div>
+                <div class="line">Lekin itna jaano ki,</div>
+                <div class="line">Tumhare bina adhuri hai meri duaon ke liye.</div>
+            </div>
+            <div class="special-box">
+                <p style="font-size: 1.3rem; line-height: 2; color: var(--accent-pink);">
+                    Main tumhe itna pyaar karta hoon ki tumhara har qadam sahi direction mein ho, yeh chahta hoon.<br><br>
+                    Tumhara har faisla Allah ki raza ke mutabiq ho, yeh chahta hoon.<br><br>
+                    Tumhari zindagi khushiyon se bhari ho - duniya aur akhirat dono mein, yeh chahta hoon.<br><br>
+                    Aur yeh sab sirf tab possible hai jab hum Allah ki boundaries mein rahein. 💫
+                </p>
+            </div>
+            <div class="shayari" style="margin-top: 30px;">
+                <div class="line">Mohabbat karte hain hum tumse,</div>
+                <div class="line">Dil o jaan se chahte hain tumhe,</div>
+                <div class="line">Lekin Allah ki mohabbat se bhi zyada,</div>
+                <div class="line">Tumhare liye chahte hain tumhe.</div>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="prevPage()">← Peeche</button>
+                <button class="nav-btn" onclick="nextPage()">Aage →</button>
+            </div>
+        </div>
+
+        <!-- Page 14: Special Request - Kuch Bhi Maang Sakti Ho -->
+        <div class="page" data-page="14">
+            <h1 style="font-size: 3rem;" class="glow-text">Alfa... Listen</h1>
+            <div class="final-message" style="margin: 40px 0;">
+                TUM MUJHSE<br>
+                KUCH BHI MAANG SAKTI HO
+            </div>
+            <div class="special-box">
+                <p style="font-size: 1.4rem; line-height: 2; color: var(--accent-pink);">
+                    Haan, bilkul sach bol raha hoon...<br><br>
+                    Duniya ki koi bhi cheez ho - main tumhare liye launga.<br>
+                    Tumhari koi bhi khwahish ho - main puri karunga.<br>
+                    Tumhe kuch bhi chahiye ho - main dunga.<br><br>
+                    Bas ek hi condition hai...
+                </p>
+            </div>
+            <div class="shayari">
+                <div class="line">Jo bhi maango, halal ho,</div>
+                <div class="line">Jo bhi chaho, Allah ki raza mein ho,</div>
+                <div class="line">Islam ki boundaries mein ho,</div>
+                <div class="line">Deen ke raaste pe ho.</div>
+            </div>
+            <div class="special-box" style="margin-top: 40px;">
+                <p style="font-size: 1.5rem; color: var(--accent-gold); font-weight: 600;">
+                    Toh batao... kya chahiye tumhe? 💖<br><br>
+                    Main yahaan hoon... tumhare liye kuch bhi karunga. ✨
+                </p>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="prevPage()">← Peeche</button>
+                <button class="nav-btn" onclick="nextPage()">Last Page →</button>
+            </div>
+        </div>
+
+        <!-- Page 15: Final Page - Games & Ending -->
+        <div class="page" data-page="15">
+            <h1 class="glow-text">Bas... Itna Hi ❤️</h1>
+            <div class="text-content">
+                <p style="font-size: 1.2rem;">Alfa, main jaanta hoon yeh sab thoda heavy ho gaya hoga.</p>
+                <p style="font-size: 1.2rem;">Lekin main chahta tha ki tum samjho - I really, really care about you.</p>
+            </div>
+            
+            <!-- Wish Generator Game -->
+            <div class="game-container">
+                <h3 style="color: var(--accent-purple); margin-bottom: 20px;">💫 Islamic Wish Generator 💫</h3>
+                <p style="color: var(--text-cream); margin-bottom: 20px;">
+                    Button dabao aur Allah se tumhare liye dua maango...
+                </p>
+                <button class="interactive-btn" onclick="generateWish()">✨ Dua Generate Karo ✨</button>
+                <div class="wish-output" id="wishOutput"></div>
+            </div>
+
+            <!-- Final Love Message -->
+            <div class="special-box" style="margin-top: 40px;">
+                <h3 style="color: var(--accent-gold); margin-bottom: 25px; font-size: 2rem;">Meri Dua Tumhare Liye</h3>
+                <p style="font-size: 1.3rem; line-height: 2.2; color: var(--text-cream);">
+                    Allah tumhe duniya aur akhirat ki har khushi de,<br>
+                    Tumhare ghar mein barkat ho,<br>
+                    Tumhari rooh ko sukoon mile,<br>
+                    Tumhara Imaan mazboot ho,<br>
+                    Tumhare walidain tumse raazi hon,<br>
+                    Tumhara dil hamesha Allah ke kareeb rahe,<br>
+                    Aur ek din hum dono Jannat mein saath hon.
+                </p>
+                <p style="margin-top: 30px; color: var(--accent-pink); font-size: 1.8rem; font-weight: 700;">
+                    Ameen Ya Rabbul Alameen ❤️
+                </p>
+            </div>
+
+            <div class="shayari" style="margin-top: 40px;">
+                <div class="line">Tum mere dil ki dhadkan ho,</div>
+                <div class="line">Tum meri zindagi ki wajah ho,</div>
+                <div class="line">Allah se dua hai meri,</div>
+                <div class="line">Hamesha tum meri saath ho.</div>
+            </div>
+
+            <div class="special-box" style="margin-top: 30px; background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 107, 157, 0.1));">
+                <p style="font-size: 1.4rem; color: var(--accent-gold); font-weight: 600;">
+                    - Mohd Affan ❤️<br>
+                    (Tumhara... hamesha)
+                </p>
+            </div>
+
+            <div class="nav-buttons" style="margin-top: 50px;">
+                <button class="nav-btn" onclick="prevPage()">← Peeche</button>
+                <button class="nav-btn" onclick="goToStart()">🏠 Dobara Dekho</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Page Navigation
+        let currentPage = 1;
+        const totalPages = 15;
+
+        function updatePageCounter() {
+            document.getElementById('pageCounter').textContent = `${currentPage} / ${totalPages}`;
+        }
+
+        function showPage(pageNum) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            const targetPage = document.querySelector(`[data-page="${pageNum}"]`);
+            if (targetPage) {
+                targetPage.classList.add('active');
+                currentPage = pageNum;
+                updatePageCounter();
+                createFloatingHearts();
+                
+                // Initialize games on specific pages
+                if (pageNum === 4) initMemoryGame();
+                if (pageNum === 6) initHeartClickGame();
+            }
+        }
+
+        function nextPage() {
+            if (currentPage < totalPages) {
+                showPage(currentPage + 1);
+            }
+        }
+
+        function prevPage() {
+            if (currentPage > 1) {
+                showPage(currentPage - 1);
+            }
+        }
+
+        function goToStart() {
+            showPage(1);
+        }
+
+        // Particles Animation
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let particlesArray = [];
+        const numberOfParticles = 100;
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = Math.random() * 0.5 - 0.25;
+                this.speedY = Math.random() * 0.5 - 0.25;
+                this.opacity = Math.random() * 0.5 + 0.2;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+            }
+
+            draw() {
+                ctx.fillStyle = `rgba(255, 107, 157, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particlesArray = [];
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+                
+                for (let j = i; j < particlesArray.length; j++) {
+                    const dx = particlesArray[i].x - particlesArray[j].x;
+                    const dy = particlesArray[i].y - particlesArray[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < 100) {
+                        ctx.strokeStyle = `rgba(181, 101, 216, ${0.2 * (1 - distance / 100)})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
+                        ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            
+            requestAnimationFrame(animateParticles);
+        }
+
+        // Floating Hearts
+        function createFloatingHearts() {
+            const hearts = ['💖', '💗', '💝', '💕', '💓', '✨', '⭐', '🌟'];
+            
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                    heart.style.left = Math.random() * window.innerWidth + 'px';
+                    heart.style.animationDelay = Math.random() * 2 + 's';
+                    heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                    document.body.appendChild(heart);
+                    
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 8000);
+                }, i * 300);
+            }
+        }
+
+        // Create Stars
+        function createStars() {
+            for (let i = 0; i < 30; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.textContent = '✨';
+                star.style.left = Math.random() * window.innerWidth + 'px';
+                star.style.top = Math.random() * window.innerHeight + 'px';
+                star.style.animationDelay = Math.random() * 2 + 's';
+                document.body.appendChild(star);
+            }
+        }
+
+        // Heart Catching Game
+        let catchScore = 0;
+        let catchingGameInterval = null;
+        let basketX = 200;
+
+        function startCatchingGame() {
+            catchScore = 0;
+            document.getElementById('catchScore').textContent = catchScore;
+            
+            if (catchingGameInterval) clearInterval(catchingGameInterval);
+            
+            const gameContainer = document.getElementById('catchingGame');
+            const basket = document.getElementById('basket');
+            
+            // Remove old hearts
+            const oldHearts = gameContainer.querySelectorAll('.falling-heart');
+            oldHearts.forEach(h => h.remove());
+            
+            // Mouse/Touch control
+            gameContainer.addEventListener('mousemove', (e) => {
+                const rect = gameContainer.getBoundingClientRect();
+                basketX = e.clientX - rect.left - 40;
+                if (basketX < 0) basketX = 0;
+                if (basketX > rect.width - 80) basketX = rect.width - 80;
+                basket.style.left = basketX + 'px';
+            });
+            
+            gameContainer.addEventListener('touchmove', (e) => {
+                const rect = gameContainer.getBoundingClientRect();
+                basketX = e.touches[0].clientX - rect.left - 40;
+                if (basketX < 0) basketX = 0;
+                if (basketX > rect.width - 80) basketX = rect.width - 80;
+                basket.style.left = basketX + 'px';
+            });
+            
+            catchingGameInterval = setInterval(() => {
+                createFallingHeart();
+            }, 1000);
+            
+            setTimeout(() => {
+                if (catchingGameInterval) clearInterval(catchingGameInterval);
+            }, 20000);
+        }
+
+        function createFallingHeart() {
+            const gameContainer = document.getElementById('catchingGame');
+            const heart = document.createElement('div');
+            heart.className = 'falling-heart';
+            heart.textContent = ['💖', '💗', '💝'][Math.floor(Math.random() * 3)];
+            heart.style.left = Math.random() * (gameContainer.offsetWidth - 30) + 'px';
+            heart.style.top = '0px';
+            
+            const duration = 3000 + Math.random() * 2000;
+            heart.style.animationDuration = duration + 'ms';
+            
+            gameContainer.appendChild(heart);
+            
+            const checkCollision = setInterval(() => {
+                const heartRect = heart.getBoundingClientRect();
+                const basketRect = document.getElementById('basket').getBoundingClientRect();
+                
+                if (heartRect.bottom >= basketRect.top &&
+                    heartRect.right >= basketRect.left &&
+                    heartRect.left <= basketRect.right) {
+                    catchScore++;
+                    document.getElementById('catchScore').textContent = catchScore;
+                    heart.remove();
+                    clearInterval(checkCollision);
+                    createFloatingHearts();
+                }
+            }, 50);
+            
+            setTimeout(() => {
+                heart.remove();
+                clearInterval(checkCollision);
+            }, duration);
+        }
+
+        // Memory Matching Game
+        let memoryCards = [];
+        let flippedCards = [];
+        let matchedPairs = 0;
+        let moves = 0;
+
+        function initMemoryGame() {
+            const symbols = ['💖', '💗', '💝', '💕', '💓', '✨', '⭐', '🌟'];
+            memoryCards = [...symbols, ...symbols].sort(() => Math.random() - 0.5);
+            flippedCards = [];
+            matchedPairs = 0;
+            moves = 0;
+            
+            document.getElementById('memoryMoves').textContent = moves;
+            document.getElementById('memoryMatched').textContent = matchedPairs;
+            
+            const gameContainer = document.getElementById('memoryGame');
+            gameContainer.innerHTML = '';
+            
+            memoryCards.forEach((symbol, index) => {
+                const card = document.createElement('div');
+                card.className = 'memory-card';
+                card.dataset.symbol = symbol;
+                card.dataset.index = index;
+                
+                card.innerHTML = `
+                    <div class="card-back">❓</div>
+                    <div class="card-front">${symbol}</div>
+                `;
+                
+                card.addEventListener('click', () => flipCard(card));
+                gameContainer.appendChild(card);
+            });
+        }
+
+        function flipCard(card) {
+            if (card.classList.contains('flipped') || card.classList.contains('matched') || flippedCards.length >= 2) {
+                return;
+            }
+            
+            card.classList.add('flipped');
+            flippedCards.push(card);
+            
+            if (flippedCards.length === 2) {
+                moves++;
+                document.getElementById('memoryMoves').textContent = moves;
+                
+                setTimeout(() => checkMatch(), 800);
+            }
+        }
+
+        function checkMatch() {
+            const [card1, card2] = flippedCards;
+            
+            if (card1.dataset.symbol === card2.dataset.symbol) {
+                card1.classList.add('matched');
+                card2.classList.add('matched');
+                matchedPairs++;
+                document.getElementById('memoryMatched').textContent = matchedPairs;
+                createFloatingHearts();
+                
+                if (matchedPairs === 8) {
+                    setTimeout(() => {
+                        alert('🎉 Shabash! Tumne game complete kar liya! 💖');
+                    }, 500);
+                }
+            } else {
+                card1.classList.remove('flipped');
+                card2.classList.remove('flipped');
+            }
+            
+            flippedCards = [];
+        }
+
+        // Heart Click Game
+        let heartClicks = 0;
+        let loveLevel = 0;
+
+        function initHeartClickGame() {
+            heartClicks = 0;
+            loveLevel = 0;
+            document.getElementById('heartClicks').textContent = heartClicks;
+            document.getElementById('loveLevel').textContent = loveLevel;
+            
+            const container = document.getElementById('heartGameContainer');
+            container.innerHTML = '';
+            
+            const hearts = ['💖', '💗', '💝', '💕', '💓', '✨', '⭐', '🌟', '💫', '🌹'];
+            
+            for (let i = 0; i < 12; i++) {
+                const btn = document.createElement('button');
+                btn.className = 'heart-btn';
+                btn.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                btn.addEventListener('click', function() {
+                    this.classList.add('clicked');
+                    heartClicks++;
+                    loveLevel = Math.min(100, heartClicks * 8);
+                    document.getElementById('heartClicks').textContent = heartClicks;
+                    document.getElementById('loveLevel').textContent = loveLevel;
+                    
+                    setTimeout(() => {
+                        this.classList.remove('clicked');
+                        this.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                    }, 500);
+                });
+                container.appendChild(btn);
+            }
+        }
+
+        // Love Calculator
+        function calculateLove() {
+            const name1 = document.getElementById('yourName').value || 'Alfa';
+            const name2 = document.getElementById('myName').value || 'Affan';
+            
+            // Always show high percentage for Alfa & Affan
+            const percentage = name1.toLowerCase().includes('alfa') ? 
+                (95 + Math.floor(Math.random() * 5)) : 
+                (70 + Math.floor(Math.random() * 30));
+            
+            document.getElementById('loveResult').textContent = percentage + '%';
+            
+            const messages = [
+                "💖 Mashallah! Perfect match!",
+                "✨ Allah ne banaya ek dusre ke liye!",
+                "💕 Made for each other!",
+                "🌟 Subhanallah! Bohot strong connection!",
+                "💝 Allah ki rehmat hai yeh rishta!"
+            ];
+            
+            document.getElementById('loveMessage').textContent = 
+                messages[Math.floor(Math.random() * messages.length)];
+            
+            createFloatingHearts();
+        }
+
+        // Quiz Game
+        let quizAnswered = false;
+
+        function checkQuizAnswer(option, isCorrect) {
+            if (quizAnswered) return;
+            
+            quizAnswered = true;
+            const options = document.querySelectorAll('.quiz-option');
+            
+            options.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            if (isCorrect) {
+                option.classList.add('correct');
+                document.getElementById('quizFeedback').textContent = 
+                    '✅ Bilkul sahi! Mashallah! Sirf do Eids hi allowed hain. 💖';
+                createFloatingHearts();
+            } else {
+                option.classList.add('wrong');
+                document.getElementById('quizFeedback').textContent = 
+                    '❌ Galat answer hai jaan... Islam mein sirf do Eids celebrate karne allowed hain.';
+            }
+            
+            setTimeout(() => {
+                quizAnswered = false;
+                options.forEach(opt => {
+                    opt.classList.remove('correct', 'wrong');
+                    opt.style.pointerEvents = 'auto';
+                });
+                document.getElementById('quizFeedback').textContent = '';
+            }, 4000);
+        }
+
+        // Wish Generator
+        const wishes = [
+            "Allah tumhe Jannat-ul-Firdaus mein jagah de 🌟",
+            "Tumhara Imaan mazboot ho aur dil sukoon se bhara rahe ✨",
+            "Allah tumhare saare halal wishes puri kare 💫",
+            "Tumhari zindagi khushiyon se bhari rahe, duniya aur akhirat mein 💖",
+            "Allah tumhe apne neik bandon mein shamil kare 🌙",
+            "Tumhare har dua qabool ho aur har gham door ho 💝",
+            "Allah tumhe sahi raasta dikhaye aur uspe chalne ki taufiq de 🌟",
+            "Tumhara rizq halal aur barkat wala ho ✨",
+            "Allah tumhe duniya ki fitnon se mahfooz rakhe 💫",
+            "Tumhare walidain raazi hon aur Allah bhi raazi ho 💖",
+            "Allah tumhara naseeb roshan kare 🌟",
+            "Tumhari har mushkil asaan ho jaaye ✨",
+            "Allah tumhe saalon ki khushiyan ek pal mein de 💝",
+            "Tumhara dil hamesha Allah ke zikr se zinda rahe 💫"
+        ];
+
+        function generateWish() {
+            const output = document.getElementById('wishOutput');
+            const randomWish = wishes[Math.floor(Math.random() * wishes.length)];
+            
+            output.style.opacity = '0';
+            setTimeout(() => {
+                output.textContent = randomWish;
+                output.style.opacity = '1';
+                output.style.transition = 'opacity 0.5s ease';
+            }, 200);
+            
+            createFloatingHearts();
+        }
+
+        // Keyboard Navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextPage();
+            } else if (e.key === 'ArrowLeft') {
+                prevPage();
+            } else if (e.key === 'Home') {
+                goToStart();
+            }
+        });
+
+        // Window Resize Handler
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initParticles();
+        });
+
+        // Initialize Everything
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 1500);
+            
+            initParticles();
+            animateParticles();
+            createStars();
+            createFloatingHearts();
+        });
+
+        // Touch Swipe Support for Mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                nextPage();
+            }
+            if (touchEndX > touchStartX + 50) {
+                prevPage();
+            }
+        }
+    </script>
+</body>
+</html>
